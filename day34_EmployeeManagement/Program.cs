@@ -6,6 +6,10 @@
         {
             Console.WriteLine("welcome to Employee Management system");
 
+            EmployeeRepo employeeRepository = new EmployeeRepo();
+            employeeRepository.GetAllemployee();
+
+
         }
     }
 }
