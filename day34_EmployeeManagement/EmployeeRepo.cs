@@ -65,6 +65,8 @@ namespace day34_EmployeeManagement
             }
 
         }
+
+        //update model
         public void UpdatingSalaryModel(SalaryDetailModel salaryDetailModel)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -119,6 +121,8 @@ namespace day34_EmployeeManagement
                 connection.Close();
             }
         }
+
+        
 
     }
 }
