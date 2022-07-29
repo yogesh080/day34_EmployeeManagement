@@ -65,8 +65,6 @@ namespace day34_EmployeeManagement
             }
 
         }
-
-        //update model
         public void UpdatingSalaryModel(SalaryDetailModel salaryDetailModel)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -122,7 +120,37 @@ namespace day34_EmployeeManagement
             }
         }
 
-        
+        public decimal ReadingUpdatedSalaryFromDataBase()
+        {
+            using (this.connection)
+            {
+                decimal salary;
+                SalaryDetailModel model = new SalaryDetailModel();
+                SqlCommand sqlCommand = new SqlCommand("select * from Employeedetail", connection);
+                this.connection.Open();
+                SqlDataReader dr = sqlCommand.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        model.EmployeeID = dr.GetInt32(0);
+                        model.EmployeeName = dr.GetString(1);
+                        model.EmployeeSalary = dr.GetInt32(2);
+                    }
+                    Console.WriteLine($"employeeId :{model.EmployeeID}, employeename: {model.EmployeeName}, salary :{model.EmployeeSalary}");
+                    salary = model.EmployeeSalary;
+
+                }
+                else
+                {
+                    throw new Exception("no data found");
+                }
+                dr.Close();
+                connection.Close();
+                return salary;
+            }
+
+        }
 
     }
 }
